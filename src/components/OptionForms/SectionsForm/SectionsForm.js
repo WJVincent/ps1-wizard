@@ -1,7 +1,7 @@
 import { usePrompt } from "../../../context/promptContext";
 
 const SectionsForm = () => {
-  const { user, setUser, host, setHost, path, setPath } = usePrompt();
+  const { user, setUser, host, setHost, path, setPath, branch, setBranch } = usePrompt();
 
   const toggle = (state, stateSetter) => {
     state === 1 ? stateSetter(-1) : stateSetter(1);
@@ -26,6 +26,15 @@ const SectionsForm = () => {
           name="hostname"
           checked={host === 1}
           onChange={() => toggle(host, setHost)}
+        />
+      </div>
+      <div>
+        <label htmlFor="git-branch">Display Git Branch</label>
+        <input
+          type="checkbox"
+          name="git-branch"
+          checked={branch === 1}
+          onChange={() => toggle(branch, setBranch)}
         />
       </div>
       <div>
