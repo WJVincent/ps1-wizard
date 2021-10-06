@@ -1,7 +1,27 @@
 import { usePrompt } from "../../../context/promptContext";
 
 const SectionsForm = () => {
-  const { user, setUser, host, setHost, path, setPath, branch, setBranch } = usePrompt();
+  const {
+    colors,
+    user,
+    setUser,
+    host,
+    setHost,
+    path,
+    setPath,
+    branch,
+    setBranch,
+    userColor,
+    setUserColor,
+    hostColor,
+    setHostColor,
+    pathColor,
+    setPathColor,
+    branchColor,
+    setBranchColor,
+  } = usePrompt();
+
+  const colorKeys = Object.keys(colors);
 
   const toggle = (state, stateSetter) => {
     state === 1 ? stateSetter(-1) : stateSetter(1);
@@ -18,7 +38,20 @@ const SectionsForm = () => {
           checked={user === 1}
           onChange={() => toggle(user, setUser)}
         />
+        {user === 1 && (
+          <select
+            onChange={(e) => setUserColor(e.target.value)}
+            value={userColor}
+          >
+            {colorKeys.map((color) => (
+              <option value={color} key={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+
       <div>
         <label htmlFor="hostname">Hostname:</label>
         <input
@@ -27,7 +60,20 @@ const SectionsForm = () => {
           checked={host === 1}
           onChange={() => toggle(host, setHost)}
         />
+        {host === 1 && (
+          <select
+            onChange={(e) => setHostColor(e.target.value)}
+            value={hostColor}
+          >
+            {colorKeys.map((color) => (
+              <option value={color} key={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+
       <div>
         <label htmlFor="git-branch">Display Git Branch</label>
         <input
@@ -36,7 +82,20 @@ const SectionsForm = () => {
           checked={branch === 1}
           onChange={() => toggle(branch, setBranch)}
         />
+        {branch === 1 && (
+          <select
+            onChange={(e) => setBranchColor(e.target.value)}
+            value={branchColor}
+          >
+            {colorKeys.map((color) => (
+              <option value={color} key={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
+
       <div>
         <p>Full or partial path</p>
 
@@ -57,6 +116,16 @@ const SectionsForm = () => {
           checked={path === "partial"}
           onChange={(e) => setPath(e.target.value)}
         />
+        <select
+          onChange={(e) => setPathColor(e.target.value)}
+          value={pathColor}
+        >
+          {colorKeys.map((color) => (
+            <option value={color} key={color}>
+              {color}
+            </option>
+          ))}
+        </select>
       </div>
       <div>
         <button>Next</button>
