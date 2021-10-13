@@ -29,7 +29,7 @@ const PromptOutput = () => {
   }, [user, userColor, colors]);
 
   useEffect(() => {
-    let hostPromptInfo = host === 1 ? "@\\H" : "";
+    let hostPromptInfo = host === 1 ? "\\H" : "";
     if (hostPromptInfo !== "") {
       setHostPrompt(colors[hostColor] + hostPromptInfo);
     } else {
@@ -38,7 +38,7 @@ const PromptOutput = () => {
   }, [host, colors, hostColor]);
 
   useEffect(() => {
-    let pathPromptInfo = path === "full" ? "\\w " : "~/\\W ";
+    let pathPromptInfo = path === "full" ? "\\w " : "\\W ";
     setPathPrompt(colors[pathColor] + pathPromptInfo);
   }, [path, pathColor, colors]);
 
@@ -62,7 +62,7 @@ const PromptOutput = () => {
           </code>
         </pre>
       )}
-      <p>{`export PS1="${userPrompt}${hostPrompt} ${pathPrompt} ${branchPrompt}"`}</p>
+      <p>{`export PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt} ${pathPrompt} ${branchPrompt}"`}</p>
     </div>
   );
 };

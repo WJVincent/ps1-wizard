@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import { PromptProvider } from "./context/promptContext";
+import "./index.css";
 
 const Root = () => {
   return (
