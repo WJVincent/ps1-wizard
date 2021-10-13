@@ -1,5 +1,6 @@
 import { usePrompt } from "../../context/promptContext";
 import { useEffect, useState } from "react";
+import styles from "./PromptOutput.module.css";
 
 const PromptOutput = () => {
   const {
@@ -52,18 +53,19 @@ const PromptOutput = () => {
   }, [branch, colors, branchColor]);
 
   return (
-    <div>
-      {branch === 1 && (
-        <pre>
-          <code>
-            {`function parse_git_branch {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'
-}`}
-          </code>
-        </pre>
-      )}
-      <p>{`export PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt} ${pathPrompt} ${branchPrompt}"`}</p>
-    </div>
+    <textarea
+      className={styles.prompt}
+      readOnly
+      value={
+        branch === 1
+          ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
+              user === 1 && host === 1 ? "@" : ""
+            }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+          : `export PS1="${userPrompt}${
+              user === 1 && host === 1 ? "@" : ""
+            }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+      }
+    />
   );
 };
 
