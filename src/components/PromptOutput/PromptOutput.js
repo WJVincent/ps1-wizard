@@ -1,5 +1,7 @@
 import { usePrompt } from "../../context/promptContext";
 import { useEffect, useState } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+
 import styles from "./PromptOutput.module.css";
 
 const PromptOutput = () => {
@@ -53,19 +55,34 @@ const PromptOutput = () => {
   }, [branch, colors, branchColor]);
 
   return (
-    <textarea
-      className={styles.prompt}
-      readOnly
-      value={
-        branch === 1
-          ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
-              user === 1 && host === 1 ? "@" : ""
-            }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-          : `export PS1="${userPrompt}${
-              user === 1 && host === 1 ? "@" : ""
-            }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-      }
-    />
+    <>
+      <textarea
+        className={styles.prompt}
+        readOnly
+        value={
+          branch === 1
+            ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
+                user === 1 && host === 1 ? "@" : ""
+              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+            : `export PS1="${userPrompt}${
+                user === 1 && host === 1 ? "@" : ""
+              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+        }
+      />
+      <CopyToClipboard
+        text={
+          branch === 1
+            ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
+                user === 1 && host === 1 ? "@" : ""
+              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+            : `export PS1="${userPrompt}${
+                user === 1 && host === 1 ? "@" : ""
+              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
+        }
+      >
+        <button className={styles.copyButton}>Copy</button>
+      </CopyToClipboard>
+    </>
   );
 };
 
