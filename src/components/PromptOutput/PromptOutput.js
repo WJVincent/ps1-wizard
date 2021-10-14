@@ -41,8 +41,13 @@ const PromptOutput = () => {
   }, [host, colors, hostColor]);
 
   useEffect(() => {
-    let pathPromptInfo = path === "full" ? "\\w " : "\\W ";
-    setPathPrompt(colors[pathColor] + pathPromptInfo);
+    let pathPromptInfo =
+      path === "full" ? "\\w" : path === "partial" ? "\\W" : "";
+    if (pathPromptInfo !== "") {
+      setPathPrompt(colors[pathColor] + pathPromptInfo);
+    } else {
+      setPathPrompt(pathPromptInfo);
+    }
   }, [path, pathColor, colors]);
 
   useEffect(() => {
@@ -54,32 +59,18 @@ const PromptOutput = () => {
     }
   }, [branch, colors, branchColor]);
 
+  let wGit = `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt}${pathPrompt}${branchPrompt}"`;
+
+  let woGit = `export PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt}${pathPrompt}${branchPrompt}"`;
+
   return (
     <>
       <textarea
         className={styles.prompt}
         readOnly
-        value={
-          branch === 1
-            ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
-                user === 1 && host === 1 ? "@" : ""
-              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-            : `export PS1="${userPrompt}${
-                user === 1 && host === 1 ? "@" : ""
-              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-        }
+        value={branch === 1 ? wGit : woGit}
       />
-      <CopyToClipboard
-        text={
-          branch === 1
-            ? `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${
-                user === 1 && host === 1 ? "@" : ""
-              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-            : `export PS1="${userPrompt}${
-                user === 1 && host === 1 ? "@" : ""
-              }${hostPrompt} ${pathPrompt} ${branchPrompt}"`
-        }
-      >
+      <CopyToClipboard text={branch === 1 ? wGit : woGit}>
         <button className={styles.copyButton}>Copy</button>
       </CopyToClipboard>
     </>

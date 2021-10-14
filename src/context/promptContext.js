@@ -8,7 +8,7 @@ export const PromptProvider = (props) => {
   const [user, setUser] = useState(1);
   const [host, setHost] = useState(1);
   const [path, setPath] = useState("full");
-  const [branch, setBranch] = useState(1);
+  const [branch, setBranch] = useState(-1);
   const [userColor, setUserColor] = useState("white");
   const [hostColor, setHostColor] = useState("white");
   const [pathColor, setPathColor] = useState("white");
