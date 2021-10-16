@@ -59,12 +59,16 @@ const PromptOutput = () => {
     }
   }, [branch, colors, branchColor]);
 
-  let wGit = `\nfunction parse_git_branch {\n  git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n} \n\nexport PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt}${pathPrompt}${branchPrompt}"`;
+  let wGit = `\n  function parse_git_branch {\n    git branch 2> /dev/null sed -e '/^[^*]/d' -e 's/* \\(.*\\)/(\\1)/'\n  } \n\n  export PS1="${userPrompt}${
+    user === 1 && host === 1 ? "@" : ""
+  }${hostPrompt}${pathPrompt}${branchPrompt}"`;
 
-  let woGit = `export PS1="${userPrompt}${user === 1 && host === 1 ? "@" : ""}${hostPrompt}${pathPrompt}${branchPrompt}"`;
+  let woGit = `\n  export PS1="${userPrompt}${
+    user === 1 && host === 1 ? "@" : ""
+  }${hostPrompt}${pathPrompt}${branchPrompt}"`;
 
   return (
-    <>
+    <div className={styles.promptContainer}>
       <textarea
         className={styles.prompt}
         readOnly
@@ -73,7 +77,7 @@ const PromptOutput = () => {
       <CopyToClipboard text={branch === 1 ? wGit : woGit}>
         <button className={styles.copyButton}>Copy</button>
       </CopyToClipboard>
-    </>
+    </div>
   );
 };
 

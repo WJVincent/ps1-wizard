@@ -1,13 +1,19 @@
+.promptContainer{
+  height: 100%;
+  width: 100%;
+}
+
 .prompt {
   height: 100%;
   width: 100%;
-  background-color: black;
+  background-color: rgb(17, 18, 19);
   color: #50fa7b;
   resize: none;
   display: flex;
   align-self: flex-end;
-  border: 1px solid #bd93f9;
+  /* border: 1px solid #bd93f9; */
   font-size: 1vh;
+  border: none;
 }
 
 .copyButton {
