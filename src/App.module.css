@@ -2,7 +2,7 @@
   height: 100vh;
   display: grid;
   grid-template-rows: 1fr 5fr 1fr;
-  background-color: 	#282a36;
+  background-color: #282a36;
 }
 
 .header {
@@ -26,19 +26,17 @@
 }
 
 .formContainer {
-  display: flex;
-  align-self: center;
-  justify-self: center;
   height: 50%;
   width: 70%;
+  margin: auto;
   background-color: #44475a;
   color: #8be9fd;
 }
 
 .promptContainer {
-  display: flex;
-  align-self: center;
-  justify-self: center;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   height: 50%;
   width: 70%;
   background-color: #44475a;

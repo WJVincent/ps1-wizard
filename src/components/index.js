@@ -1,3 +1,4 @@
 import { SectionsForm } from "./OptionForms";
-import PromptOutput from './PromptOutput';
-export { SectionsForm, PromptOutput };
+import PromptOutput from "./PromptOutput";
+import PromptVisual from "./PromptVisual";
+export { SectionsForm, PromptOutput, PromptVisual };

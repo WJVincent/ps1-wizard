@@ -4,11 +4,14 @@
   background-color: black;
   color: #50fa7b;
   resize: none;
+  display: flex;
+  align-self: flex-end;
+  border: 1px solid #bd93f9;
+  font-size: 1vh;
 }
 
-.copyButton{
+.copyButton {
   background-color: #50fa7b;
-  /* align-self: flex-end; */
   position: absolute;
   right: 0;
   bottom: 0;

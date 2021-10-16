@@ -1,4 +1,4 @@
-import { SectionsForm, PromptOutput } from "./components";
+import { SectionsForm, PromptOutput, PromptVisual } from "./components";
 import styles from "./App.module.css";
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
         </div>
 
         <div className={styles.promptContainer}>
+          <PromptVisual />
           <PromptOutput />
         </div>
       </div>
